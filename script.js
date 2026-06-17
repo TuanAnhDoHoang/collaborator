@@ -72,15 +72,19 @@ function getRandomStatusCode() {
 // Logging the visit
 function logVisit() {
   getVisitorIP().then((visitorIP) => {
-    const log = `Status Code: ${getRandomStatusCode()} | Timestamp: ${new Date().toLocaleString()} | Sender IP: ${visitorIP} | Referrer IP: ${getReferrerIP()}`;
+    const log = `Status Code: ${getRandomStatusCode()} | Timestamp: ${new Date().toLocaleString()} | Visitor IP: ${visitorIP} | Destination: ${getDestinationUrl()} | Referrer: ${getReferrerInfo()}`;
     addLogEntry(log);
   });
 }
 
-// Function to get the referring IP address
-function getReferrerIP() {
-  // Replace this with your actual method of retrieving the referring IP address
-  return '192.168.0.1';
+// Function to get the current destination URL for the log entry
+function getDestinationUrl() {
+  return window.location.href;
+}
+
+// Function to get the referring page info
+function getReferrerInfo() {
+  return document.referrer || 'None';
 }
 
 // Broadcast message to all clients to clear logs
